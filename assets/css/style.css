@@ -1,0 +1,251 @@
+/* Importing fonts */
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
+
+/* Root Variables */
+:root {
+  --primary-color: #06f;
+  --heading-color: rgb(1, 16, 41);
+  --border-color: #ddd;
+}
+
+/* Common CSS */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Roboto", sans-serif;
+}
+
+body {
+  background-color: white;
+}
+
+/* .container (for responsive) */
+.container {
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
+}
+@media (min-width: 768px) {
+  .container {
+    width: 750px;
+  }
+}
+@media (min-width: 992px) {
+  .container {
+    width: 970px;
+  }
+}
+@media (min-width: 1200px) {
+  .container {
+    width: 1170px;
+  }
+}
+
+/* .hidden */
+.hidden {
+  display: none;
+}
+
+/* .btn */
+.btn {
+  padding: 0.7rem 1.5rem;
+  display: inline-block;
+  text-decoration: none;
+  cursor: pointer;
+  border: none;
+  outline: none;
+  background-color: var(--primary-color);
+  color: white;
+  font-size: 1rem;
+  border-radius: 5px;
+  font-weight: 500;
+  transition: 0.3s;
+}
+
+.btn[disabled] {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.btn:hover {
+  opacity: 0.9;
+}
+
+/* Custom file input */
+.custom-file {
+  background-color: var(--heading-color);
+  color: white;
+  padding: 0.7rem;
+  font-family: sans-serif;
+  border-radius: 0.3rem;
+  cursor: pointer;
+  display: inline-block;
+}
+
+#file-chosen {
+  margin-left: 0.3rem;
+  font-family: sans-serif;
+}
+
+/* Navbar */
+nav {
+  padding: 1rem 0;
+  background-color: white;
+  border-bottom: 1px solid var(--border-color);
+}
+
+nav .nav-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+nav .nav-wrapper .nav-brand a {
+  text-decoration: none;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--heading-color);
+  margin-right: 2rem;
+}
+
+nav .nav-wrapper ul {
+  display: flex;
+  flex-wrap: wrap;
+  list-style: none;
+}
+
+nav .nav-wrapper ul li {
+  margin: 0 1rem;
+}
+
+nav .nav-wrapper ul li:last-child {
+  margin-right: 0;
+}
+
+nav .nav-wrapper ul li a {
+  color: #222;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 1rem;
+}
+
+/* Main content */
+main {
+  padding: 4rem 0;
+}
+
+/* Form */
+.form-wrapper {
+  max-width: 500px;
+  width: 100%;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.form-wrapper .form-title {
+  font-size: 2rem;
+  color: var(--heading-color);
+  font-weight: 600;
+  margin-bottom: 2rem;
+}
+
+.or {
+  padding: 1rem 0;
+  position: relative;
+}
+
+.or > span {
+  background-color: white;
+  position: relative;
+  z-index: 1;
+  padding: 0 0.5rem;
+  font-weight: 500;
+}
+
+.or::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 220px;
+  height: 1px;
+  background-color: var(--border-color);
+}
+
+.url-input > input {
+  padding: 0.7rem;
+  font-size: 1rem;
+  border: 1px solid var(--border-color);
+  border-radius: 0.3rem;
+  margin-bottom: 1rem;
+  outline: none;
+  font-size: 0.9rem;
+  width: 100%;
+  max-width: 220px;
+}
+
+/* Footer */
+footer {
+  padding: 4rem 0;
+  border-top: 1px solid var(--border-color);
+}
+
+/* Progress bar */
+.uploading-status {
+  margin: 0 auto;
+  margin-top: 2rem;
+  text-align: left;
+  max-width: 220px;
+  width: 100%;
+}
+
+.progress-bar {
+  --height: 15px;
+  width: 100%;
+  border-radius: 100px;
+  background-color: #ddd;
+  margin-bottom: 1rem;
+  display: block;
+  height: var(--height);
+  line-height: var(--height);
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+  font-weight: 500;
+  font-size: 0.7rem;
+  padding: 0 0.3rem;
+  text-align: center;
+  color: var(--color);
+}
+
+.progress-bar::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: var(--percent);
+  height: 100%;
+  background-color: var(--primary-color);
+  z-index: -1;
+}
+
+.uploading-status > ul {
+  list-style: none;
+}
+
+.uploading-status > ul li {
+  font-size: 0.9rem;
+  font-weight: 500;
+  line-height: 1.7rem;
+}
+
+.uploading-status > ul li strong {
+  width: 90px;
+  display: inline-block;
+}
