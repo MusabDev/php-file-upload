@@ -25,49 +25,57 @@ actualBtn.addEventListener("change", function () {
 // Setting ajaxForm to achive the process status of uplaoding
 $("#form").ajaxForm({
   beforeSend: function () {
+    // If user did not put any file or link
+    if ($("#actual-btn").val().length == 0 && $("#link").val().length == 0) {
+      alert("Please choose a file or enter a link");
+      return false;
+    }
+    // Upload starting...
     $(".uploading-status").removeClass("hidden");
-    $(".progress-bar").css({
+    $("#uploadingProgress").css({
       "--percent": "0%",
       "--primary-color": "#06f",
       "--color": "#000",
     });
-    $(".progress-bar").text("0%");
+    $("#uploadingProgress").text("0%");
     $("#sendButton").attr("disabled", true); // Disable the send button
     // If transfer is from link set the file type to file extension
     if ($("#link").val() != "") {
       $("#fileType").text($("#link").val().split(".").pop().toUpperCase());
     }
+    // Showing message box progress bar
+    setTimeout(showMessage, 1000);
   },
   uploadProgress: function (event, position, total, percentComplete) {
     if ($("#link").val() == "") {
       // If the link is empty, then set the progress text
-      $(".progress-bar").text(`${percentComplete}%`);
+      $("#uploadingProgress").text(`${percentComplete}%`);
       // Setting other information
       $("#completedSize").text(bytesToSize(position));
       $("#totalSize").text(bytesToSize(total));
-      $(".progress-bar").css("--percent", `${percentComplete}%`);
+      $("#uploadingProgress").css("--percent", `${percentComplete}%`);
     } else {
       // If the link is not empty, then set the progress text to Uploading..
-      $(".progress-bar").text("Uploading...");
+      $("#uploadingProgress").text("Uploading...");
 
       $("#completedSize").text("Unallocated");
       $("#totalSize").text("Unallocated");
-      $(".progress-bar").css("--percent", `75%`);
+      $("#uploadingProgress").css("--percent", `75%`);
     }
 
     // If the completed upload progress is upto 50%, then change the progress bar text color to white
     if (percentComplete > 50) {
-      $(".progress-bar").css("--color", "#fff");
+      $("#uploadingProgress").css("--color", "#fff");
     }
   },
   complete: function (xhr) {
-    $(".progress-bar").css({
+    $("#uploadingProgress").css({
       "--percent": "100%",
       "--primary-color": "#38b000",
       "--color": "#fff",
     });
     $("#sendButton").attr("disabled", false); // Enable the send button
-    $(".progress-bar").text("Completed");
+    $("#uploadingProgress").text("Completed");
     // If the uploading is from link
     if ($("#link").val() != "") {
       // Set file and completed file size to dynamic
@@ -81,3 +89,35 @@ $("#form").ajaxForm({
     $("#link").val("");
   },
 });
+
+// Getting message from server
+const showAfter = 60; // Time when the message is shown
+let messageProgress = 0;
+const showMessage = () => {
+  // Showing message box
+  $(".message-box").removeClass("hidden");
+
+  // Hitting ajax request for getting message from txt file
+  $.ajax({
+    url: "./text.txt",
+    type: "GET",
+    success: function (data) {
+      $("#message").val(data);
+    },
+  });
+
+  messageProgress++;
+  // Setting progress
+  console.log(messageProgress);
+  document
+    .getElementById("messageProgress")
+    .setAttribute("style", `--percent: ${(messageProgress / 1.2) * 2}%`);
+
+  if (messageProgress > 0 && messageProgress < showAfter) {
+    setTimeout(showMessage, 1000);
+  } else {
+    // Showing message box input
+    $("#messageBox").removeClass("hidden");
+    $("#messageProgress").addClass("hidden");
+  }
+};

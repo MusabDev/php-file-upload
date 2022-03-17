@@ -70,7 +70,7 @@
 
           <!-- Uploading status -->
           <div class="uploading-status hidden">
-            <div class="progress-bar"></div>
+            <div class="progress-bar" id="uploadingProgress"></div>
             <ul>
               <li>
                 <strong>Completed:</strong>
@@ -90,16 +90,14 @@
       </div>
     </main>
 
-    <!-- Footer -->
-    <footer>
+    <div class="message-box hidden">
       <div class="container">
-        <label for="message">Message:</label>
-        <textarea
-          name="message"
-          id="message"
-          style="width: 100%; height: 200px; margin-top: 0.6rem"
-        ></textarea>
+        <div class="progress-bar" id="messageProgress"></div>
+        <div id="messageBox" class="hidden">
+          <label for="message">Message:</label>
+          <textarea name="message" id="message"></textarea>
+        </div>
       </div>
-    </footer>
+    </div>
   </body>
 </html>

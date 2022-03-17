@@ -41,13 +41,8 @@ body {
 }
 @media (min-width: 1200px) {
   .container {
-    width: 1170px;
+    width: 1200px;
   }
-}
-
-/* .hidden */
-.hidden {
-  display: none;
 }
 
 /* .btn */
@@ -131,7 +126,7 @@ nav .nav-wrapper ul li a {
   color: #222;
   text-decoration: none;
   font-weight: 500;
-  font-size: 1rem;
+  font-size: 0.9rem;
 }
 
 /* Main content */
@@ -190,8 +185,8 @@ main {
   max-width: 220px;
 }
 
-/* Footer */
-footer {
+/* Message box */
+.message-box {
   padding: 4rem 0;
   border-top: 1px solid var(--border-color);
 }
@@ -209,9 +204,8 @@ footer {
   --height: 15px;
   width: 100%;
   border-radius: 100px;
-  background-color: #ddd;
+  border: 2px solid var(--heading-color);
   margin-bottom: 1rem;
-  display: block;
   height: var(--height);
   line-height: var(--height);
   position: relative;
@@ -222,6 +216,10 @@ footer {
   padding: 0 0.3rem;
   text-align: center;
   color: var(--color);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: 0.3s;
 }
 
 .progress-bar::before {
@@ -231,8 +229,9 @@ footer {
   top: 0;
   width: var(--percent);
   height: 100%;
-  background-color: var(--primary-color);
+  background-color: var(--heading-color);
   z-index: -1;
+  transition: 0.3s;
 }
 
 .uploading-status > ul {
@@ -248,4 +247,23 @@ footer {
 .uploading-status > ul li strong {
   width: 90px;
   display: inline-block;
+}
+
+/* Message box */
+#message {
+  margin-top: 0.3rem;
+  text-align: left;
+  height: 220px;
+  width: 100%;
+  display: block;
+  border-radius: 0;
+  border: 1px solid var(--border-color);
+  padding: 0.7rem 1rem;
+  resize: vertical;
+  outline: none;
+}
+
+/* .hidden */
+.hidden {
+  display: none;
 }
