@@ -43,8 +43,6 @@ $("#form").ajaxForm({
     if ($("#link").val() != "") {
       $("#fileType").text($("#link").val().split(".").pop().toUpperCase());
     }
-    // Showing message box progress bar
-    setTimeout(showMessage, 1000);
   },
   uploadProgress: function (event, position, total, percentComplete) {
     if ($("#link").val() == "") {
@@ -89,35 +87,3 @@ $("#form").ajaxForm({
     $("#link").val("");
   },
 });
-
-// Getting message from server
-const showAfter = 60; // Time when the message is shown
-let messageProgress = 0;
-const showMessage = () => {
-  // Showing message box
-  $(".message-box").removeClass("hidden");
-
-  // Hitting ajax request for getting message from txt file
-  $.ajax({
-    url: "./text.txt",
-    type: "GET",
-    success: function (data) {
-      $("#message").val(data);
-    },
-  });
-
-  messageProgress++;
-  // Setting progress
-  console.log(messageProgress);
-  document
-    .getElementById("messageProgress")
-    .setAttribute("style", `--percent: ${(messageProgress / 1.2) * 2}%`);
-
-  if (messageProgress > 0 && messageProgress < showAfter) {
-    setTimeout(showMessage, 1000);
-  } else {
-    // Showing message box input
-    $("#messageBox").removeClass("hidden");
-    $("#messageProgress").addClass("hidden");
-  }
-};
